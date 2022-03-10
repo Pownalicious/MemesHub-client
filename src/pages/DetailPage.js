@@ -42,6 +42,31 @@ export default function DetailPage() {
               })}
         </div>
       </div>
+      <form onSubmit={(e) => e.preventDefault()}>
+      <div className="form-outline mb-2 mt-2">
+        <label className="form-label" htmlFor="form4Example1">
+          <b> Title</b>
+        </label>
+        <input
+          type="text"
+          id="form4Example1"
+          className="form-control"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          
+        />
+         <button
+        type="submit"
+        className="btn btn-primary btn-block mb-4"
+        disabled={!title || !description}
+        onClick={() => createNewNote(title, description)}
+      >
+        Send
+      </button>
+      
+      <hr/>
+      
+
     </div>
   );
 }

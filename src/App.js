@@ -13,7 +13,7 @@ import { getUserWithStoredToken } from "./store/user/actions";
 import { Jumbotron } from "react-bootstrap";
 import HomePage from "./pages/HomePage";
 import DetailPage from "./pages/DetailPage";
-import CommentPage from "./pages/CommentPage";
+import Me from "./pages/Me";
 
 const Other = () => (
   <Jumbotron>
@@ -40,7 +40,7 @@ function App() {
         <Route path="/other" element={<Other />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/comment/:id" element={<CommentPage />} />
+        <Route path="/me" element={<Me />} />
       </Routes>
     </div>
   );
