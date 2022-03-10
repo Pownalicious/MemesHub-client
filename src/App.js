@@ -14,6 +14,7 @@ import { Jumbotron } from "react-bootstrap";
 import HomePage from "./pages/HomePage";
 import DetailPage from "./pages/DetailPage";
 import Me from "./pages/Me";
+import PostForm from "./pages/PostForm";
 
 const Other = () => (
   <Jumbotron>
@@ -41,6 +42,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/me" element={<Me />} />
+        <Route path="/postform" element={<PostForm />} />
       </Routes>
     </div>
   );

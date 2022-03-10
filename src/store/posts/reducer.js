@@ -1,7 +1,9 @@
 const initialState = {
   posts: [],
   post: {},
-  comments: null,
+  comments: [],
+  genres: [],
+  likes: [],
 };
 
 export default function reducer(state = initialState, action) {
@@ -26,6 +28,21 @@ export default function reducer(state = initialState, action) {
         comments: action.payload,
       };
     }
+
+    case "SET/genres": {
+      return {
+        ...state,
+        genres: action.payload,
+      };
+    }
+
+    case "SET/likes": {
+      return {
+        ...state,
+        likes: action.payload,
+      };
+    }
+
     default: {
       return state;
     }

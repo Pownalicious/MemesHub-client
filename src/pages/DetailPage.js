@@ -6,6 +6,7 @@ import { selectPost } from "../store/posts/selectors";
 import CommentCard from "../components/CommentCard";
 import { getComments } from "../store/posts/actions";
 import { selectComments } from "../store/posts/selectors";
+import CommentForm from "../components/CommentForm";
 
 export default function DetailPage() {
   const dispatch = useDispatch();
@@ -32,41 +33,11 @@ export default function DetailPage() {
           {!comments
             ? "Loading..."
             : comments.map((comment, index) => {
-                return (
-                  <CommentCard
-                    key={index}
-                    id={comment.id}
-                    comment={comment.comment}
-                  />
-                );
+                return <CommentCard key={index} comment={comment.comment} />;
               })}
         </div>
+        <CommentForm />
       </div>
-      <form onSubmit={(e) => e.preventDefault()}>
-      <div className="form-outline mb-2 mt-2">
-        <label className="form-label" htmlFor="form4Example1">
-          <b> Title</b>
-        </label>
-        <input
-          type="text"
-          id="form4Example1"
-          className="form-control"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          
-        />
-         <button
-        type="submit"
-        className="btn btn-primary btn-block mb-4"
-        disabled={!title || !description}
-        onClick={() => createNewNote(title, description)}
-      >
-        Send
-      </button>
-      
-      <hr/>
-      
-
     </div>
   );
 }

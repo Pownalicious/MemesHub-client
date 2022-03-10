@@ -14,6 +14,18 @@ export const setPost = (data) => ({
   payload: data,
 });
 
+//SET ALL GENRES
+export const setGenres = (data) => ({
+  type: "SET/genres",
+  payload: data,
+});
+
+//SET ALL LIKES
+export const setLikes = (data) => ({
+  type: "SET/likes",
+  payload: data,
+});
+
 //SET POST COMMENTS
 export const setComments = (data) => ({
   type: "SET/comments",
@@ -53,21 +65,45 @@ export function getComments(id) {
         `http://localhost:4000/post/${id}/comments`
       );
       dispatch(setComments(response.data));
+    } catch (error) {}
+    console.log("No comments data found");
+  };
+}
+
+//GET LIKES
+export function getLikes(id) {
+  return async function thunk(dispatch, getState) {
+    try {
+      const response = await axios.get(
+        `http://localhost:4000/post/${id}/likes`
+      );
+      dispatch(setLikes(response.data));
     } catch (error) {
-      console.log("No Data Found");
+      console.log("No likes data found");
+    }
+  };
+}
+
+//GET ALL GENRES
+export function getGenres() {
+  return async function thunk(dispatch, getState) {
+    try {
+      const response = await axios.get(`http://localhost:4000/genres`);
+      console.log("Im getting genres data back", response);
+      dispatch(setGenres(response.data));
+    } catch (error) {
+      console.warn("No genres data");
     }
   };
 }
 
 //POST COMMENT
-export function createComment(userId, postId, comment) {
+export function createComment(postId, comment) {
   return async function thunk(dispatch, getState) {
     const { token } = selectUser(getState());
-    console.log("createReservation", userId, postId, comment);
     const response = await axios.post(
       `http://localhost:4000/comment`,
       {
-        userId,
         postId,
         comment,
       },

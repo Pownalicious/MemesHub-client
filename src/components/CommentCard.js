@@ -1,10 +1,14 @@
 import React from "react";
+// import { useSelector } from "react-redux";
+
+// import { selectUser } from "../store/user/selectors";
 
 export default function CommentCard(props) {
+  // const user = useSelector(selectUser);
+
   return (
     <div>
-      <p>Comment: {props.comment}</p>
-      <p>{props.id}</p>
+      <p>{props.comment}</p>
     </div>
   );
 }
