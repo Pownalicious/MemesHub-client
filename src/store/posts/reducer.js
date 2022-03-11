@@ -1,6 +1,6 @@
 const initialState = {
   posts: [],
-  post: {},
+  post: null,
   comments: [],
   genres: [],
   likes: [],

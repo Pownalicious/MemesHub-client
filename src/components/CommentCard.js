@@ -7,8 +7,9 @@ export default function CommentCard(props) {
   // const user = useSelector(selectUser);
 
   return (
-    <div>
-      <p>{props.comment}</p>
+    <div className="comment">
+      <p className="UserName">{props.userName}</p>
+      <p className="comment">{props.comment}</p>
     </div>
   );
 }

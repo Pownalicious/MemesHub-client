@@ -22,7 +22,7 @@ export const setGenres = (data) => ({
 
 //SET ALL LIKES
 export const setLikes = (data) => ({
-  type: "SET/likes",
+  type: "SET/posts",
   payload: data,
 });
 

@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getDetailPost } from "../store/posts/actions";
 import { selectPost } from "../store/posts/selectors";
 import CommentCard from "../components/CommentCard";
 import { getComments } from "../store/posts/actions";
 import { selectComments } from "../store/posts/selectors";
+import PostCard from "../components/PostCard";
 import CommentForm from "../components/CommentForm";
 
 export default function DetailPage() {
@@ -15,29 +16,26 @@ export default function DetailPage() {
   const { id } = useParams();
 
   useEffect(() => {
-    dispatch(getDetailPost(id), dispatch(getComments(id)));
+    dispatch(getDetailPost(id));
   }, [dispatch, id]);
 
-  return (
-    <div>
-      {!post ? (
-        "Loading"
-      ) : (
-        <div className="detail-post">
-          <h2>{post.title}</h2>
-          <img src={post.imageUrl} alt="no img" />
-        </div>
-      )}
-      <div>
-        <div>
-          {!comments
-            ? "Loading..."
-            : comments.map((comment, index) => {
-                return <CommentCard key={index} comment={comment.comment} />;
-              })}
-        </div>
-        <CommentForm />
-      </div>
-    </div>
+  return !post ? (
+    <p>Loading</p>
+  ) : (
+    <>
+      <PostCard id={post.id} title={post.title} imageUrl={post.imageUrl} />
+      <CommentForm />
+
+      {post.comments.length > 0 &&
+        post.comments.map((comment, index) => {
+          return (
+            <CommentCard
+              key={index}
+              comment={comment.comment}
+              userName={comment.userName}
+            />
+          );
+        })}
+    </>
   );
 }

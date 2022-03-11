@@ -35,15 +35,17 @@ function App() {
       <Navigation />
       <MessageBox />
       {isLoading ? <Loading /> : null}
-      <Routes>
-        <Route exact path="/" element={<HomePage />} />
-        <Route path="/detail/:id" element={<DetailPage />} />
-        <Route path="/other" element={<Other />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/me" element={<Me />} />
-        <Route path="/postform" element={<PostForm />} />
-      </Routes>
+      <div className="main">
+        <Routes>
+          <Route exact path="/" element={<HomePage />} />
+          <Route path="/detail/:id" element={<DetailPage />} />
+          <Route path="/other" element={<Other />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/me" element={<Me />} />
+          <Route path="/postform" element={<PostForm />} />
+        </Routes>
+      </div>
     </div>
   );
 }

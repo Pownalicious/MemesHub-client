@@ -1,48 +1,49 @@
 import React, { useEffect } from "react";
-import { Nav } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import PostCard from "../components/PostCard";
 import { getposts } from "../store/posts/actions";
 import { selectPosts } from "../store/posts/selectors";
-import { selectToken, selectUser } from "../store/user/selectors";
+
+function filteredList(list, key, query) {
+  let filtered = list;
+
+  if (query && key) {
+    filtered = filtered.filter(
+      (item) => item[key].toLowerCase().indexOf(query.toLowerCase()) > -1
+    );
+  }
+
+  return filtered;
+}
 
 export default function HomePage() {
   const dispatch = useDispatch();
   const posts = useSelector(selectPosts);
-  const user = useSelector(selectUser);
-  const token = useSelector(selectToken);
+  const filteredPosts = filteredList(posts, "title");
 
   useEffect(() => {
     dispatch(getposts());
   }, []);
 
-  return (
-    <div>
-      {!token ? (
-        " "
-      ) : (
-        <Nav.Item style={{ padding: ".5rem 1rem" }}>
-          Welcome back {user.name}!
-        </Nav.Item>
-      )}
-
-      <div className="posts-list">
-        {posts.length === 0 ? (
-          <p>loading...</p>
-        ) : (
-          posts.map((post, index) => {
-            return (
-              <PostCard
-                key={index}
-                id={post.id}
-                title={post.title}
-                imageUrl={post.imageUrl}
-              />
-            );
-          })
-        )}
-        ;
-      </div>
+  return filteredPosts.length === 0 ? (
+    <p>loading...</p>
+  ) : (
+    <div className="posts-list">
+      {filteredPosts.map((post, index) => {
+        return (
+          <PostCard
+            key={index}
+            id={post.id}
+            title={post.title}
+            imageUrl={post.imageUrl}
+          >
+            <NavLink className={"detail"} to={`/detail/${post.id}`}>
+              <button>Comment</button>
+            </NavLink>
+          </PostCard>
+        );
+      })}
     </div>
   );
 }
