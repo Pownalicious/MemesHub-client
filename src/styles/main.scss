@@ -1,4 +1,9 @@
 @import "./fonts";
+@import "./colors";
 @import "./generic";
 @import "./components/all";
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+.main {
+  margin: 0 auto;
+  width: 45%;
+}

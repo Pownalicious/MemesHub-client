@@ -1,0 +1,31 @@
+.post-card {
+  display: block;
+  margin-bottom: 1.5rem;
+
+  .title {
+    display: inline-block;
+  }
+
+  .image {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin-bottom: 1rem;
+  }
+  .buttons {
+    text-align: right;
+
+    button {
+      border: 0;
+      background-color: rgba(39, 135, 214, 0.85);
+    }
+
+    a.detail {
+      margin-left: 0.5rem;
+    }
+    // button+button margin: left: ;
+  }
+}
