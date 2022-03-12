@@ -10,13 +10,11 @@ export default function Me() {
     <div>
       <h1>{user.name}</h1>
       <hr />
-      <NavLink
-        className="create-post-link"
-        style={{ textDecoration: "none" }}
-        to={"/postform"}
-      >
-        <h4 style={{ color: "black" }}>Create post</h4>
-      </NavLink>{" "}
+      <div className="create-post-link">
+        <NavLink style={{ textDecoration: "none" }} to={"/postform"}>
+          <h4>Post a meme</h4>
+        </NavLink>{" "}
+      </div>
     </div>
   );
 }

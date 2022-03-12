@@ -16,6 +16,7 @@ export default function PostCard(props) {
         </button>
         {props.children && props.children}
       </div>
+      <hr />
     </div>
   );
 }

@@ -38,11 +38,7 @@ export default function CommentForm() {
         />
       </div>
 
-      <button
-        type="submit"
-        className="btn btn-primary btn-block mb-4"
-        // onClick={() => dispatch(createComment(id, description))}
-      >
+      <button type="submit" className="btn btn-primary btn-block mb-4">
         Send
       </button>
     </form>
