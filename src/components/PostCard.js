@@ -9,11 +9,11 @@ export default function PostCard(props) {
         style={{
           backgroundImage: `url(${props.imageUrl})`,
         }}
-      >
-        =
-      </div>
+      ></div>
       <div className="buttons">
-        <button>Likes {props.likes}</button>
+        <button onClick={props.triggerLike} id={props.id}>
+          Like {props.likes.length}
+        </button>
         {props.children && props.children}
       </div>
     </div>

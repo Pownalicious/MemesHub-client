@@ -71,13 +71,27 @@ export function getComments(id) {
 }
 
 //GET LIKES
-export function getLikes(id) {
+export function postLike(postId, getAllPosts = false) {
   return async function thunk(dispatch, getState) {
+    const { token } = selectUser(getState());
     try {
-      const response = await axios.get(
-        `http://localhost:4000/post/${id}/likes`
+      const response = await axios.post(
+        `http://localhost:4000/post/${postId}/like`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
-      dispatch(setLikes(response.data));
+
+      if (response.data.success) {
+        if (getAllPosts) {
+          dispatch(getposts());
+        } else {
+          dispatch(getDetailPost(postId));
+        }
+      }
     } catch (error) {
       console.log("No likes data found");
     }
@@ -113,11 +127,11 @@ export function createComment(postId, comment) {
         },
       }
     );
-    if (response.data.success) {
+    if (response.data) {
       dispatch(
-        showMessageWithTimeout("success", false, "Reservation created!", 2500)
+        showMessageWithTimeout("success", false, "Comment placed!", 2500)
       );
-      dispatch(getComments());
+      dispatch(getDetailPost(postId));
     }
   };
 }

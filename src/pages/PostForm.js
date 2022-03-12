@@ -1,11 +1,11 @@
-import { useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { getGenres } from "../store/posts/actions";
 import { selectToken } from "../store/user/selectors";
 import { selectGenres } from "../store/posts/selectors";
-import React, { useEffect } from "react";
-import { getGenres } from "../store/posts/actions";
-import { useParams } from "react-router-dom";
 
 export default function PostForm() {
   const [title, setTitle] = useState("");
@@ -14,10 +14,16 @@ export default function PostForm() {
   const token = useSelector(selectToken);
   const genres = useSelector(selectGenres);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getGenres());
   }, []);
+
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    navigate("/");
+  };
 
   async function createNewPost(title, imageUrl, genreId) {
     try {
@@ -36,7 +42,7 @@ export default function PostForm() {
   }
 
   return (
-    <form>
+    <form onSubmit={onSubmitHandler}>
       <div>
         <div className="mb-3">
           <label htmlFor="formGroupExampleInput" className="form-label">

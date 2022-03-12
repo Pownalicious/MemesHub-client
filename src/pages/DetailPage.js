@@ -1,29 +1,38 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getDetailPost } from "../store/posts/actions";
+import { getDetailPost, postLike } from "../store/posts/actions";
 import { selectPost } from "../store/posts/selectors";
 import CommentCard from "../components/CommentCard";
-import { getComments } from "../store/posts/actions";
-import { selectComments } from "../store/posts/selectors";
+
 import PostCard from "../components/PostCard";
 import CommentForm from "../components/CommentForm";
 
 export default function DetailPage() {
   const dispatch = useDispatch();
   const post = useSelector(selectPost);
-  const comments = useSelector(selectComments);
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(getDetailPost(id));
   }, [dispatch, id]);
 
+  function likeHandler(event) {
+    let postId = event.target.id;
+    dispatch(postLike(postId));
+  }
+
   return !post ? (
     <p>Loading</p>
   ) : (
     <>
-      <PostCard id={post.id} title={post.title} imageUrl={post.imageUrl} />
+      <PostCard
+        id={post.id}
+        title={post.title}
+        imageUrl={post.imageUrl}
+        likes={post.likes}
+        triggerLike={likeHandler}
+      />
       <CommentForm />
 
       {post.comments.length > 0 &&
@@ -31,6 +40,7 @@ export default function DetailPage() {
           return (
             <CommentCard
               key={index}
+              id={comment.id}
               comment={comment.comment}
               userName={comment.userName}
             />

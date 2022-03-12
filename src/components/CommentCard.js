@@ -7,9 +7,9 @@ export default function CommentCard(props) {
   // const user = useSelector(selectUser);
 
   return (
-    <div className="comment">
-      <p className="UserName">{props.userName}</p>
-      <p className="comment">{props.comment}</p>
+    <div className="comment-card" id={"commentid-" + props.id}>
+      <span className="user">{props.userName}</span>
+      <span className="message">{props.comment}</span>
     </div>
   );
 }
