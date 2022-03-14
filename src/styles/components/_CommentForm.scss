@@ -1,26 +1,40 @@
-.icon {
-  height: 40px;
-  width: 40px;
-}
+.CommentForm {
+  .icon {
+    height: 40px;
+    width: 40px;
+  }
 
-.button {
-  background: transparent;
-  outline: none;
-  border: none;
-  margin-left: 1rem;
-}
+  .form-wrap {
+    padding-bottom: 0.5rem;
+    position: relative;
 
-.form-wrap {
-  padding-bottom: 0.5rem;
-}
+    .emoji-icon {
+      cursor: pointer;
+      position: absolute;
+      background: transparent;
+      outline: none;
+      border: none;
+      right: 0;
+      top: 0;
+    }
 
-.form-control {
-  width: 40rem;
-  margin: 0;
-  display: initial;
-}
+    // .emoji-mart-emoji {
+    //   display: none;
+    // }
+  }
 
-#btn-two {
-  margin-left: 0.5rem;
-  background-color: rgb(240, 106, 106);
+  .form-control {
+    // width: 40rem;
+    margin: 0;
+    display: initial;
+  }
+
+  .emoji-picker {
+    border: 1px solid red;
+  }
+
+  #btn-two {
+    margin-left: 0.5rem;
+    background-color: rgb(240, 106, 106);
+  }
 }

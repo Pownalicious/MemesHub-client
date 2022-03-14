@@ -7,7 +7,7 @@ import { selectToken, selectUser } from "../../store/user/selectors";
 import NavbarItem from "./NavbarItem";
 import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
-import MemeLogo from "/Users/macpro/Projects/Codaisseur/memeshub/react-redux-jwt-bootstrap-template/src/logo.jpg";
+import MemeLogo from "../../static/img/logo.png";
 
 export default function Navigation() {
   const token = useSelector(selectToken);
@@ -16,7 +16,7 @@ export default function Navigation() {
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
   return (
-    <Navbar expand="lg" className="navbar">
+    <Navbar expand="lg" className="Navigation">
       <Navbar.Brand as={NavLink} to="/" className="logo">
         <img src={MemeLogo} alt="logo" />
       </Navbar.Brand>

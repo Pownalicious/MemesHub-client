@@ -24,25 +24,37 @@ export default function CommentForm() {
     setInput("");
   };
 
-  async function formSubmitHandler(event, id, description) {
+  async function formSubmitHandler(event, id, description, isButton = false) {
     event.preventDefault();
-    dispatch(createComment(id, description));
-    setInput("");
 
-    setTimeout(() => {
-      let allComments = document.querySelectorAll(".comment-card");
-      let lastComment = allComments[allComments.length - 1];
+    if (event.code === "Enter" || isButton) {
+      dispatch(createComment(id, description));
+      setInput("");
 
-      if (lastComment) {
-        let lastItem = document.getElementById(lastComment.id);
-        lastItem.classList.add("is-new");
-        lastItem.scrollIntoView();
+      setTimeout(() => {
+        let allComments = document.querySelectorAll(".comment-card");
+        let lastComment = allComments[allComments.length - 1];
+
+        if (lastComment) {
+          let lastItem = document.getElementById(lastComment.id);
+          lastItem.classList.add("is-new");
+          lastItem.scrollIntoView();
+        }
+      }, 250);
+    }
+  }
+
+  if (document) {
+    // let emojiDialog = document.getElementsByClassName("emoji-mart");
+    document.addEventListener("keyup", (evt) => {
+      if (evt.code === "Escape" && showEmojis) {
+        setShowEmojis(false);
       }
-    }, 250);
+    });
   }
 
   return (
-    <form onSubmit={(event) => formSubmitHandler(event, id, input)}>
+    <form className="CommentForm" onSubmit={(event) => event.preventDefault()}>
       <div className="form-wrap">
         <input
           type="text"
@@ -50,32 +62,30 @@ export default function CommentForm() {
           placeholder="Write a comment"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onKeyUp={(event) => formSubmitHandler(event, id, input)}
         />
-        {showEmojis && (
-          <div>
-            <Picker onSelect={addEmoji} />
-          </div>
-        )}
-
-        <button className="button" onClick={() => setShowEmojis(!showEmojis)}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="icon"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-        </button>
+        {showEmojis && <Picker id="emoji-picker" onSelect={addEmoji} />}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="icon emoji-icon"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          onClick={(evt) => setShowEmojis(!showEmojis)}
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+          />
+        </svg>
       </div>
       <div>
-        <button type="submit" className="btn btn-primary btn-block mb-4">
+        <button
+          onClick={(event) => formSubmitHandler(event, id, input, true)}
+          className="btn btn-primary btn-block mb-4"
+        >
           Post
         </button>
 

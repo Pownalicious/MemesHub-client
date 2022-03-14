@@ -135,3 +135,27 @@ export function createComment(postId, comment) {
     }
   };
 }
+
+//DELETE ONE POST AS AN ADMIN
+export function deletePost(id) {
+  return async function thunk(dispatch, getState) {
+    const { token } = selectUser(getState());
+    try {
+      const response = await axios.delete(
+        `http://localhost:4000/delete/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.success) {
+        console.log("Reservation deleted", response);
+        dispatch(getposts());
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}

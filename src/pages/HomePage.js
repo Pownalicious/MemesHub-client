@@ -68,21 +68,25 @@ export default function HomePage() {
                 imageUrl={post.imageUrl}
                 likes={post.likes}
                 triggerLike={likeHandler}
+                postId={post.id}
               >
                 <NavLink className={"detail"} to={`/detail/${post.id}`}>
                   <button>Comment</button>
                 </NavLink>
-
                 <div className="share-wrap">
-                  <FacebookShareButton url={`http://localhost:4000/post/${id}`}>
+                  <FacebookShareButton
+                    url={`https://my-app.netlify.app/post/${post.id}`}
+                  >
                     <FacebookIcon size={30} round={true} />
                   </FacebookShareButton>
-
-                  <TwitterShareButton url={`http://localhost:4000/post/${id}`}>
+                  <TwitterShareButton
+                    url={`http://localhost:4000/post/${post.id}`}
+                  >
                     <TwitterIcon size={30} round={true} />
                   </TwitterShareButton>
-
-                  <WhatsappShareButton url={`http://localhost:4000/post/${id}`}>
+                  <WhatsappShareButton
+                    url={`http://localhost:4000/post/${post.id}`}
+                  >
                     <WhatsappIcon size={30} round={true} />
                   </WhatsappShareButton>
                 </div>

@@ -43,7 +43,7 @@ export default function PostForm() {
 
   return (
     <form onSubmit={onSubmitHandler}>
-      <div>
+      <div className="main-2">
         <div className="mb-3">
           <label htmlFor="formGroupExampleInput" className="form-label">
             Title

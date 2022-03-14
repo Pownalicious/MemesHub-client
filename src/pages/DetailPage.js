@@ -43,6 +43,7 @@ export default function DetailPage() {
               id={comment.id}
               comment={comment.comment}
               userName={comment.userName}
+              createdAt={comment.createdAt}
             />
           );
         })}
