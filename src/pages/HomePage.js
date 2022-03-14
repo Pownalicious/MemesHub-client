@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import PostCard from "../components/PostCard";
-import { getposts, getDetailPost, postLike } from "../store/posts/actions";
+import { getposts, postLike } from "../store/posts/actions";
 import { selectPosts } from "../store/posts/selectors";
+import Scroll from "../components/Scroll";
+
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -88,6 +90,7 @@ export default function HomePage() {
             );
           })
         )}
+        <Scroll showBelow={250} />;
       </div>
     </div>
   );
