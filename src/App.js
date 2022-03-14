@@ -37,7 +37,6 @@ function App() {
         </div>
         <span style={{ color: darkMode ? "#c96dfd" : "grey" }}>☽</span>
       </div>
-
       <Navigation />
       <MessageBox />
       {isLoading ? <Loading /> : null}

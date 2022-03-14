@@ -1,15 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import PostCard from "../components/PostCard";
-import { getposts, postLike } from "../store/posts/actions";
+import { getposts, getDetailPost, postLike } from "../store/posts/actions";
 import { selectPosts } from "../store/posts/selectors";
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterShareButton,
+  TwitterIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+} from "react-share";
 
 export default function HomePage() {
   const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   const posts = useSelector(selectPosts);
   const filteredPosts = filteredList(posts, "title", search);
+  const { id } = useParams();
 
   useEffect(() => {
     dispatch(getposts());
@@ -61,6 +70,20 @@ export default function HomePage() {
                 <NavLink className={"detail"} to={`/detail/${post.id}`}>
                   <button>Comment</button>
                 </NavLink>
+
+                <div className="share-wrap">
+                  <FacebookShareButton url={`http://localhost:4000/post/${id}`}>
+                    <FacebookIcon size={30} round={true} />
+                  </FacebookShareButton>
+
+                  <TwitterShareButton url={`http://localhost:4000/post/${id}`}>
+                    <TwitterIcon size={30} round={true} />
+                  </TwitterShareButton>
+
+                  <WhatsappShareButton url={`http://localhost:4000/post/${id}`}>
+                    <WhatsappIcon size={30} round={true} />
+                  </WhatsappShareButton>
+                </div>
               </PostCard>
             );
           })
