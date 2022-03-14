@@ -1,5 +1,6 @@
 .comment-card {
-  border: 1px solid #213e4d;
+  // border: 1px solid #213e4d;
+  border: 1px solid #b8d3e0;
   border-radius: 0.5rem;
   padding: 0.5rem;
 
@@ -13,10 +14,15 @@
   }
 
   &.is-new {
-    background-color: rgba(green, 0.5);
+    background-color: #cfe8fc;
   }
 
   & + .comment-card {
-    margin-top: 1rem;
+    margin-top: 0.75rem;
+  }
+
+  .timestamp {
+    font-size: 0.75rem;
+    color: #737373;
   }
 }
