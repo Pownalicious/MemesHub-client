@@ -18,7 +18,7 @@ export default function PostForm() {
 
   useEffect(() => {
     dispatch(getGenres());
-  }, []);
+  }, [dispatch]);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -36,6 +36,7 @@ export default function PostForm() {
           },
         }
       );
+      console.log(response);
     } catch (e) {
       console.log("error", e);
     }
