@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import PostCard from "../components/PostCard";
 import { getposts, postLike } from "../store/posts/actions";
@@ -20,11 +20,10 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const posts = useSelector(selectPosts);
   const filteredPosts = filteredList(posts, "title", search);
-  const { id } = useParams();
 
   useEffect(() => {
     dispatch(getposts());
-  }, []);
+  }, [dispatch]);
 
   function filteredList(list = [], key, query) {
     let filteredList = list;
